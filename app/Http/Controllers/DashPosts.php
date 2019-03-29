@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Posts;
 
 class DashPosts extends Controller
 {
@@ -13,7 +14,9 @@ class DashPosts extends Controller
      */
     public function index()
     {
-        //
+        $posts = Posts::orderby('created_at', 'desc') -> paginate(5);
+        
+        return view('admin.pages.index') -> withPosts($posts);
     }
 
     /**
@@ -34,7 +37,16 @@ class DashPosts extends Controller
      */
     public function store(Request $request)
     {
-        return view('admin.pages.show');
+        $post = new Posts();
+        
+        $post -> title = $request -> title;
+        $post -> description = $request -> description;
+        $post -> content = $request -> content;
+        $post -> image = $request -> image;
+        
+        $post -> save();
+        
+        return redirect() -> route('admin-panel.show', $post -> id);
     }
 
     /**
@@ -45,7 +57,9 @@ class DashPosts extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Posts::find($id);
+        
+        return view('admin.pages.show') -> withPost($post);
     }
 
     /**
@@ -56,7 +70,9 @@ class DashPosts extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Posts::find($id);
+        
+        return view('admin.pages.edit') -> withPost($post);
     }
 
     /**
@@ -68,7 +84,16 @@ class DashPosts extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Posts::find($id);
+        
+        $post -> title = $request -> title;
+        $post -> description = $request -> description;
+        $post -> content = $request -> content;
+        $post -> image = $request -> image;
+        
+        $post -> save();
+        
+        return redirect() -> route('admin-panel.show', $post -> id);
     }
 
     /**
@@ -79,6 +104,10 @@ class DashPosts extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Posts::find($id);
+        
+        $post -> delete();
+        
+        return redirect() -> route('admin-panel.index');
     }
 }

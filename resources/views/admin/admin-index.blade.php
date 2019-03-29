@@ -8,6 +8,10 @@
     </head>
     <body>
         <div class="container">
+            <header>
+                <a href="/admin-panel" class="btn btn-primary">Все статьи</a>
+                <a href="/admin-panel/create" class="btn btn-primary">Добавить статью</a>
+            </header>
             <div class="row">
                 @yield('content')
             </div>

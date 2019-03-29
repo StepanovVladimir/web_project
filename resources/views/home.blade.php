@@ -13,8 +13,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    <a href="admin-panel/create">Добавить статью</a>
+                    <div><a href="/admin-panel">Все статьи</a></div>
+                    <div><a href="/admin-panel/create">Добавить статью</a></div>
                 </div>
             </div>
         </div>

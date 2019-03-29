@@ -1,10 +1,10 @@
 @extends('admin.admin-index')
 
-@section('title', 'Добавить пост')
+@section('title', 'Редактировать пост')
 
 @section('content')
     <div class="col-md-7">
-        {!! Form::open(['route' => 'admin-panel.store']) !!}
+        {!! Form::model($post, array('route' => array('admin-panel.update', $post -> id), 'method' => 'PUT')) !!}
             <div class="form-group">
                 <div class="col-md-3">
                     {{ Form::label('title', 'Заголовок') }}
