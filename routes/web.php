@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MainController@getAllPosts');
+
+Route::get('/post/{id}', 'MainController@getPost');
 
 Auth::routes();
 

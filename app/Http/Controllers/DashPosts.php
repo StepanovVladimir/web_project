@@ -14,7 +14,7 @@ class DashPosts extends Controller
      */
     public function index()
     {
-        $posts = Posts::orderby('created_at', 'desc') -> paginate(5);
+        $posts = Posts::orderby('created_at', 'desc') -> paginate(4);
         
         return view('admin.pages.index') -> withPosts($posts);
     }
