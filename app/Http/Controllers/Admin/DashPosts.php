@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Posts;
+use App\Http\Controllers\Controller;
 
 class DashPosts extends Controller
 {
@@ -37,16 +38,31 @@ class DashPosts extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Posts();
-        
-        $post -> title = $request -> title;
-        $post -> description = $request -> description;
-        $post -> content = $request -> content;
-        $post -> image = $request -> image;
-        
-        $post -> save();
-        
-        return redirect() -> route('admin-panel.show', $post -> id);
+        try
+        {
+            $this->validate($request, [
+                'title' => 'required',
+                'description' => 'required',
+                'content' => 'required',
+                'image' => 'required'
+            ]);
+            
+            $path = $request->file('image')->store('uploads', 'public');
+            $post = new Posts();
+
+            $post -> title = $request -> title;
+            $post -> description = $request -> description;
+            $post -> content = $request -> content;
+            $post -> image = $path;
+
+            $post -> save();
+
+            return redirect() -> route('admin-panel.show', $post -> id);
+        }
+        catch (ValidationException $err)
+        {
+            
+        }
     }
 
     /**
@@ -84,16 +100,32 @@ class DashPosts extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Posts::find($id);
+        try
+        {
+            $this->validate($request, [
+                'title' => 'required',
+                'description' => 'required',
+                'content' => 'required',
+                'image' => 'required'
+            ]);
+            
+            $path = $request->file('image')->store('uploads', 'public');
         
-        $post -> title = $request -> title;
-        $post -> description = $request -> description;
-        $post -> content = $request -> content;
-        $post -> image = $request -> image;
-        
-        $post -> save();
-        
-        return redirect() -> route('admin-panel.show', $post -> id);
+            $post = Posts::find($id);
+
+            $post -> title = $request -> title;
+            $post -> description = $request -> description;
+            $post -> content = $request -> content;
+            $post -> image = $path;
+
+            $post -> save();
+            
+            return redirect() -> route('admin-panel.show', $post -> id);
+        }
+        catch (ValidationException $err)
+        {
+            
+        }
     }
 
     /**

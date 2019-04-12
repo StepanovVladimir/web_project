@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ Auth::user()->name }}
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -13,8 +17,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <div><a href="/admin-panel">Все статьи</a></div>
-                    <div><a href="/admin-panel/create">Добавить статью</a></div>
+                    @if (Auth::user()->isAdmin == 1)
+                        <div><a href="{{ route('admin-panel.index') }}">Все статьи</a></div>
+                        <div><a href="{{ route('admin-panel.create') }}">Добавить статью</a></div>
+                    @endif
                 </div>
             </div>
         </div>

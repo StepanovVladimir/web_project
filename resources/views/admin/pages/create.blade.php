@@ -1,10 +1,10 @@
 @extends('admin.admin-index')
 
-@section('title', 'Добавить пост')
+@section('title', 'Добавить статью')
 
 @section('content')
     <div class="col-md-7">
-        {!! Form::open(['route' => 'admin-panel.store']) !!}
+        {!! Form::open(array('route' => 'admin-panel.store', 'files' => true)) !!}
             <div class="form-group">
                 <div class="col-md-3">
                     {{ Form::label('title', 'Заголовок') }}
@@ -18,7 +18,8 @@
                     {{ Form::label('image', 'Изображение') }}
                 </div>
                 <div class="col-md-9">
-                    {{ Form::text('image', null, ['class' => 'form-control']) }}
+                    <!--{{ Form::text('image', null, ['class' => 'form-control']) }}-->
+                    {{ Form::file('image', null, ['class' => 'form-control']) }}
                 </div>
             </div>
             <div class="form-group">

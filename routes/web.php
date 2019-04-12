@@ -11,12 +11,15 @@
 |
 */
 
-Route::get('/', 'MainController@getAllPosts');
+Route::get('/', 'MainController@getAllPosts')->name('main');
 
-Route::get('/post/{id}', 'MainController@getPost');
+Route::get('/post/{id}', 'MainController@getPost')->name('post');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('admin-panel', 'DashPosts')->middleware('auth');
+Route::group(['middleware' => 'auth'], function()
+{
+    Route::resource('admin-panel', 'Admin\DashPosts')->middleware('admin');
+});
