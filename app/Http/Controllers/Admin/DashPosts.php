@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Posts;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class DashPosts extends Controller
 {
@@ -48,16 +49,17 @@ class DashPosts extends Controller
             ]);
             
             $path = $request->file('image')->store('uploads', 'public');
+            
             $post = new Posts();
 
-            $post -> title = $request -> title;
-            $post -> description = $request -> description;
-            $post -> content = $request -> content;
-            $post -> image = $path;
+            $post->title = $request->title;
+            $post -> description = $request->description;
+            $post->content = $request->content;
+            $post->image = $path;
 
-            $post -> save();
+            $post->save();
 
-            return redirect() -> route('admin-panel.show', $post -> id);
+            return redirect()->route('admin-panel.show', $post->id);
         }
         catch (ValidationException $err)
         {
@@ -105,22 +107,25 @@ class DashPosts extends Controller
             $this->validate($request, [
                 'title' => 'required',
                 'description' => 'required',
-                'content' => 'required',
-                'image' => 'required'
+                'content' => 'required'
             ]);
             
-            $path = $request->file('image')->store('uploads', 'public');
-        
             $post = Posts::find($id);
-
-            $post -> title = $request -> title;
-            $post -> description = $request -> description;
-            $post -> content = $request -> content;
-            $post -> image = $path;
-
-            $post -> save();
             
-            return redirect() -> route('admin-panel.show', $post -> id);
+            if ($request->hasFile('image'))
+            {
+                Storage::disk('public')->delete($post->image);
+                $path = $request->file('image')->store('uploads', 'public');
+                $post->image = $path;
+            }
+            
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->content = $request->content;
+            
+            $post->save();
+            
+            return redirect()->route('admin-panel.show', $post->id);
         }
         catch (ValidationException $err)
         {
@@ -138,8 +143,9 @@ class DashPosts extends Controller
     {
         $post = Posts::find($id);
         
-        $post -> delete();
+        Storage::disk('public')->delete($post->image);
+        $post->delete();
         
-        return redirect() -> route('admin-panel.index');
+        return redirect()->route('admin-panel.index');
     }
 }

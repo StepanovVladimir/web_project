@@ -18,7 +18,6 @@
                     {{ Form::label('image', 'Изображение') }}
                 </div>
                 <div class="col-md-9">
-                    <!--{{ Form::text('image', null, ['class' => 'form-control']) }}-->
                     {{ Form::file('image', null, ['class' => 'form-control']) }}
                 </div>
             </div>
@@ -27,7 +26,7 @@
                     {{ Form::label('description', 'Описание') }}
                 </div>
                 <div class="col-md-9">
-                    {{ Form::textarea('description', null, ['class' => 'form-control']) }}
+                    {{ Form::textarea('description', null, ['class' => 'form-control'], ['id' => 'description']) }}
                 </div>
             </div>
             <div class="form-group">
@@ -35,7 +34,7 @@
                     {{ Form::label('content', 'Текст') }}
                 </div>
                 <div class="col-md-9">
-                    {{ Form::textarea('content', null, ['class' => 'form-control']) }}
+                    {{ Form::textarea('content', null, ['class' => 'form-control'], ['id' => 'content']) }}
                 </div>
             </div>
             <div class="form-group">
@@ -45,4 +44,9 @@
             </div>
         {!! Form::close() !!}
     </div>
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace( 'content' );
+    </script>
 @endsection
