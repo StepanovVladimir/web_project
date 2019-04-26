@@ -10,8 +10,7 @@
         <div class="container">
             <header>
                 <a href="{{ url('/') }}" class="btn btn-primary">На главную</a>
-                <a href="{{ route('admin-panel.index') }}" class="btn btn-primary">Все статьи</a>
-                <a href="{{ route('admin-panel.create') }}" class="btn btn-primary">Добавить статью</a>
+                <a href="{{ route('post.create') }}" class="btn btn-primary">Добавить статью</a>
             </header>
             <div class="row">
                 @yield('content')

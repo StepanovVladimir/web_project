@@ -3,21 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Posts;
+use App\Models\Posts;
+use App\Models\Comment;
 
 class MainController extends Controller
 {
-    public function getAllPosts()
+    public function index()
     {
-        $posts = Posts::orderby('created_at', 'desc') -> paginate(4);
+        $posts = Posts::orderby('created_at', 'desc')->paginate(4);
         
-        return view('pages.main') -> withPosts($posts);
+        return view('pages.main')->withPosts($posts);
     }
     
-    public function getPost($id)
+    public function show($id)
     {
         $post = Posts::find($id);
-        
-        return view('pages.post') -> withPost($post);
+        $comments = $post->comments;
+        return view('pages.post', ['post' => $post, 'comments' => $comments]);
     }
 }

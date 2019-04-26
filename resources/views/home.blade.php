@@ -17,10 +17,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if (Auth::user()->isAdmin == 1)
-                        <div><a href="{{ route('admin-panel.index') }}">Все статьи</a></div>
-                        <div><a href="{{ route('admin-panel.create') }}">Добавить статью</a></div>
-                    @endif
+                    @auth
+                        <div><a href="{{ route('user.comments.show') }}">Мои комментарии</a></div>
+                        @if (Auth::user()->isAdmin == 1)
+                            <div><a href="{{ route('comments.show') }}">Все комментарии</a></div>
+                            <div><a href="{{ route('post.create') }}">Добавить статью</a></div>
+                        @endif
+                    @endauth
                 </div>
             </div>
         </div>

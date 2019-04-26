@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="col-md-7">
-        {!! Form::model($post, array('route' => array('admin-panel.update', $post -> id), 'files' => true, 'method' => 'PUT')) !!}
+        {!! Form::model($post, array('route' => array('post.update', $post -> id), 'files' => true, 'method' => 'PUT')) !!}
             <div class="form-group">
                 <div class="col-md-3">
                     {{ Form::label('title', 'Заголовок') }}

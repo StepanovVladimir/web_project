@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="col-md-7">
-        {!! Form::open(array('route' => 'admin-panel.store', 'files' => true)) !!}
+        {!! Form::open(array('route' => 'post.store', 'files' => true)) !!}
             <div class="form-group">
                 <div class="col-md-3">
                     {{ Form::label('title', 'Заголовок') }}

@@ -3,24 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Posts;
+use App\Models\Posts;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class DashPosts extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $posts = Posts::orderby('created_at', 'desc') -> paginate(4);
-        
-        return view('admin.pages.index') -> withPosts($posts);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +16,7 @@ class DashPosts extends Controller
      */
     public function create()
     {
-        return view('admin.pages.create');
+        return view('admin.posts.create');
     }
 
     /**
@@ -59,27 +47,13 @@ class DashPosts extends Controller
 
             $post->save();
 
-            return redirect()->route('admin-panel.show', $post->id);
+            return redirect()->route('post.show', $post->id);
         }
         catch (ValidationException $err)
         {
             
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $post = Posts::find($id);
-        
-        return view('admin.pages.show') -> withPost($post);
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -90,7 +64,7 @@ class DashPosts extends Controller
     {
         $post = Posts::find($id);
         
-        return view('admin.pages.edit') -> withPost($post);
+        return view('admin.posts.edit') -> withPost($post);
     }
 
     /**
@@ -125,7 +99,7 @@ class DashPosts extends Controller
             
             $post->save();
             
-            return redirect()->route('admin-panel.show', $post->id);
+            return redirect()->route('post.show', $post->id);
         }
         catch (ValidationException $err)
         {
@@ -146,6 +120,6 @@ class DashPosts extends Controller
         Storage::disk('public')->delete($post->image);
         $post->delete();
         
-        return redirect()->route('admin-panel.index');
+        return redirect()->route('main');
     }
 }
