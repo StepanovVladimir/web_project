@@ -118,6 +118,7 @@ class DashPosts extends Controller
         $post = Posts::find($id);
         
         Storage::disk('public')->delete($post->image);
+        $post->comments()->delete();
         $post->delete();
         
         return redirect()->route('main');

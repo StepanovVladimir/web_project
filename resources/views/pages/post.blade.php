@@ -36,11 +36,11 @@
                 </div>
             </div>
         {!! Form::close() !!}
-        <h2>Комментариев {{ _commentsCount($post->id) }}</h2>
+        <h2>Комментариев {{ $post->comments->count() }}</h2>
         @foreach($comments as $comment)
             <div class="col-md-8">
                 <span>
-                    <b class="font-weight-bold">{{ _user($comment->id_user)->name }}</b> {{ $comment->created_at->format('d-m-Y') }}
+                    <b class="font-weight-bold">{{ $comment->user->name }}</b> {{ $comment->created_at->format('d-m-Y') }}
                     @auth
                         @if (Auth::user()->id == $comment->id_user || Auth::user()->isAdmin == 1)
                             {!! Form::open(['method' => 'DELETE', 'route' => ['comment.destroy', $comment->id]]) !!}

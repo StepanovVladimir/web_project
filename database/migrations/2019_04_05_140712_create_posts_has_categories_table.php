@@ -14,7 +14,6 @@ class CreatePostsHasCategoriesTable extends Migration
     public function up()
     {
         Schema::create('posts_has_categories', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('id_post');
             $table->integer('id_category');
             $table->timestamps();

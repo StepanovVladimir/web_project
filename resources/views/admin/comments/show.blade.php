@@ -6,8 +6,11 @@
     <div class="col-md-10">
         @foreach($comments as $comment)
             <div>
-                <a href="/post/{{ $comment->id_post }}"><h4>{{ _post($comment->id_post)->title }}</h4></a>
-                <span><b class="font-weight-bold">{{ Auth::user()->name }}</b> {{ $comment->created_at->format('d-m-Y') }}</span>
+                <a href="/post/{{ $comment->id_post }}"><h4>{{ $comment->post->title }}</h4></a>
+                <span><b class="font-weight-bold">{{ $comment->user->name }}</b> {{ $comment->created_at->format('d-m-Y') }}</span>
+                {!! Form::open(['method' => 'DELETE', 'route' => ['comment.destroy', $comment->id]]) !!}
+                {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
+                {!! Form::close() !!}
                 {!! $comment->comment !!}
             </div>
         @endforeach
