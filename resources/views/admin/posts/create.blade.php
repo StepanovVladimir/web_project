@@ -7,6 +7,17 @@
         {!! Form::open(array('route' => 'post.store', 'files' => true)) !!}
             <div class="form-group">
                 <div class="col-md-3">
+                    <label>Категории</label>
+                </div>
+                <div class="col-md-9">
+                    @foreach($categories as $category)
+                        <label><input type="checkbox" name="categories[]" value="{{ $category->id }}"> {{ $category->name }}</label>
+                        <br>
+                    @endforeach
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
                     {{ Form::label('title', 'Заголовок') }}
                 </div>
                 <div class="col-md-9">

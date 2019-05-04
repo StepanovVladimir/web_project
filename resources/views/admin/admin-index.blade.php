@@ -9,9 +9,13 @@
     <body>
         <div class="container">
             <header>
-                <a href="{{ url('/') }}" class="btn btn-primary">На главную</a>
+                <a href="{{ url('/home') }}" class="btn btn-primary">Моя страница</a>
                 <a href="{{ route('post.create') }}" class="btn btn-primary">Добавить статью</a>
+                <a href="{{ route('comments.show') }}" class="btn btn-primary">Все комментарии</a>
+                <a href="{{ route('categories.index') }}" class="btn btn-primary">Категории</a>
+                <a href="{{ route('categories.create') }}" class="btn btn-primary">Добавить категорию</a>
             </header>
+            <br>
             <div class="row">
                 @yield('content')
             </div>

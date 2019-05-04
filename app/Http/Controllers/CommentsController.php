@@ -9,19 +9,30 @@ class CommentsController extends Controller
 {
     public function store(Request $request)
     {
-        $content = $request->input('content');
-        $id_post = (int)$request->input('id_post');
-        $id_user = auth()->user()->id;
-        
-        $comment = new Comment();
-        
-        $comment->id_post = $id_post;
-        $comment->id_user = $id_user;
-        $comment->comment = $content;
-        
-        $comment->save();
-        
-        return back();
+        try
+        {
+            $this->validate($request, [
+                'content' => 'required',
+            ]);
+            
+            $content = $request->input('content');
+            $id_post = (int)$request->input('id_post');
+            $id_user = auth()->user()->id;
+
+            $comment = new Comment();
+
+            $comment->id_post = $id_post;
+            $comment->id_user = $id_user;
+            $comment->comment = $content;
+
+            $comment->save();
+
+            return back();
+        }
+        catch (ValidationException $err)
+        {
+            
+        }
     }
     
     public function show()

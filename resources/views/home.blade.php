@@ -22,6 +22,8 @@
                         @if (Auth::user()->isAdmin == 1)
                             <div><a href="{{ route('comments.show') }}">Все комментарии</a></div>
                             <div><a href="{{ route('post.create') }}">Добавить статью</a></div>
+                            <div><a href="{{ route('categories.index') }}">Категории</a></div>
+                            <div><a href="{{ route('categories.create') }}">Добавить категорию</a></div>
                         @endif
                     @endauth
                 </div>

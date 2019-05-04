@@ -4,7 +4,24 @@
 
 @section('content')
     <div class="col-md-7">
-        {!! Form::model($post, array('route' => array('post.update', $post -> id), 'files' => true, 'method' => 'PUT')) !!}
+        {!! Form::model($post, array('route' => array('post.update', $post->id), 'files' => true, 'method' => 'PUT')) !!}
+            <div class="form-group">
+                <div class="col-md-3">
+                    <label>Категории</label>
+                </div>
+                <div class="col-md-9">
+                    @foreach ($categories as $category)
+                        <label>
+                            <input type="checkbox" name="categories[]" value="{{ $category->id }}"
+                            @if ($post->categories->where('id', $category->id)->count() == 1)
+                                checked="checked"
+                            @endif>
+                            {{ $category->name }}
+                        </label>
+                        <br>
+                    @endforeach
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-md-3">
                     {{ Form::label('title', 'Заголовок') }}

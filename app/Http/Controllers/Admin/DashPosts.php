@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Posts;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Posts;
+use App\Models\Category;
 
 class DashPosts extends Controller
 {
@@ -16,7 +17,8 @@ class DashPosts extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::orderby('name', 'asc')->get();
+        return view('admin.posts.create', ['categories' => $categories]);
     }
 
     /**
@@ -46,6 +48,8 @@ class DashPosts extends Controller
             $post->image = $path;
 
             $post->save();
+            
+            $post->categories()->attach($request->input('categories'));
 
             return redirect()->route('post.show', $post->id);
         }
@@ -63,8 +67,9 @@ class DashPosts extends Controller
     public function edit($id)
     {
         $post = Posts::find($id);
-        
-        return view('admin.posts.edit') -> withPost($post);
+        $categories = Category::orderby('name', 'asc')->get();
+
+        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
@@ -99,6 +104,9 @@ class DashPosts extends Controller
             
             $post->save();
             
+            $post->categories()->detach();
+            $post->categories()->attach($request->input('categories'));
+            
             return redirect()->route('post.show', $post->id);
         }
         catch (ValidationException $err)
@@ -119,6 +127,7 @@ class DashPosts extends Controller
         
         Storage::disk('public')->delete($post->image);
         $post->comments()->delete();
+        $post->categories()->detach();
         $post->delete();
         
         return redirect()->route('main');

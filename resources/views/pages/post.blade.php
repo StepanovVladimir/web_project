@@ -3,9 +3,6 @@
 @section('title', 'Статья')
 
 @section('content')
-    <header class="col-md-10">
-        <a href="/" class="btn btn-primary">На главную</a>
-    </header>
     <div class="col-md-10">
         <h1>{{ $post->title }}</h1>
         <p>{!! $post->description !!}</p>
@@ -14,7 +11,7 @@
         <p>{{ Carbon\Carbon::parse($post->created_at)->format('d m Y') }}</p>
         @auth
             @if (Auth::user()->isAdmin == 1)
-                <a href="{{ URL::to('post/' . $post -> id) . '/edit' }}" class="btn btn-primary">Редактировать</a>
+                <a href="{!! route('post.edit', ['id' => $post->id]) !!}" class="btn btn-primary">Редактировать</a>
                 {!! Form::open(['method' => 'DELETE', 'route' => ['post.destroy', $post->id]]) !!}
                 {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
@@ -37,7 +34,7 @@
             </div>
         {!! Form::close() !!}
         <h2>Комментариев {{ $post->comments->count() }}</h2>
-        @foreach($comments as $comment)
+        @foreach ($comments as $comment)
             <div class="col-md-8">
                 <span>
                     <b class="font-weight-bold">{{ $comment->user->name }}</b> {{ $comment->created_at->format('d-m-Y') }}
