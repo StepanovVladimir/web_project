@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Posts;
 use App\Models\Category;
+use Illuminate\Validation\ValidationException;
 
 class DashPosts extends Controller
 {
@@ -55,7 +56,7 @@ class DashPosts extends Controller
         }
         catch (ValidationException $err)
         {
-            
+            return back()->with('error', 'Вы не заполнили все поля');
         }
     }
     /**
@@ -111,7 +112,7 @@ class DashPosts extends Controller
         }
         catch (ValidationException $err)
         {
-            
+            return back()->with('error', 'Вы не заполнили все поля');
         }
     }
 

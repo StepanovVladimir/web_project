@@ -40,9 +40,7 @@
                     <b class="font-weight-bold">{{ $comment->user->name }}</b> {{ $comment->created_at->format('d-m-Y') }}
                     @auth
                         @if (Auth::user()->id == $comment->id_user || Auth::user()->isAdmin == 1)
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['comment.destroy', $comment->id]]) !!}
-                            {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
+                            <a href="javascript:;" class="delete" rel="{{ $comment->id }}" token="{{ csrf_token() }}" route="{!! route('comment.destroy') !!}">Удалить</a>
                         @endif
                     @endauth
                 </span>

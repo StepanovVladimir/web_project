@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'], function()
 {
     Route::post('/comments', 'CommentsController@store')->name('comments.store');
     Route::get('/home/comments', 'CommentsController@show')->name('user.comments.show');
-    Route::delete('/comment/{id}', 'CommentsController@destroy')->where('id', '\d+')->name('comment.destroy');
+    Route::delete('/comment', 'CommentsController@destroy')->name('comment.destroy');
     
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function()
     {
@@ -44,6 +44,6 @@ Route::group(['middleware' => 'auth'], function()
         Route::post('/categories', 'Admin\CategoriesController@store')->name('categories.store');
         Route::get('/categories/{id}/edit', 'Admin\CategoriesController@edit')->where('id', '\d+')->name('categories.edit');
         Route::put('/categories/{id}', 'Admin\CategoriesController@update')->where('id', '\d+')->name('categories.update');
-        Route::delete('/categories/{id}', 'Admin\CategoriesController@destroy')->where('id', '\d+')->name('categories.destroy');
+        Route::delete('/categories', 'Admin\CategoriesController@destroy')->name('categories.destroy');
     });
 });

@@ -8,9 +8,7 @@
             <div>
                 <a href="/post/{{ $comment->id_post }}"><h4>{{ $comment->post->title }}</h4></a>
                 <span><b class="font-weight-bold">{{ $comment->user->name }}</b> {{ $comment->created_at->format('d-m-Y') }}</span>
-                {!! Form::open(['method' => 'DELETE', 'route' => ['comment.destroy', $comment->id]]) !!}
-                {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}
+                <a href="javascript:;" class="delete" rel="{{ $comment->id }}" token="{{ csrf_token() }}" route="{!! route('comment.destroy') !!}">Удалить</a>
                 {!! $comment->comment !!}
             </div>
         @endforeach

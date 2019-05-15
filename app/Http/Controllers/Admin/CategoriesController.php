@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Validation\ValidationException;
 
 class CategoriesController extends Controller
 {
@@ -37,7 +38,7 @@ class CategoriesController extends Controller
         }
         catch (ValidationException $err)
         {
-            
+            return back()->with('error', 'Вы не заполнили название катерогии');
         }
     }
     
@@ -66,15 +67,18 @@ class CategoriesController extends Controller
         }
         catch (ValidationException $err)
         {
-            
+            return back()->with('error', 'Вы не заполнили название катерогии');
         }
     }
     
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $category = Category::find($id);
-        $category->posts()->detach();
-        $category->delete();
-        return back();
+        if ($request->ajax())
+        {
+            $id = (int)$request->input('id');
+            $category = Category::find($id);
+            $category->posts()->detach();
+            $category->delete();
+        }
     }
 }

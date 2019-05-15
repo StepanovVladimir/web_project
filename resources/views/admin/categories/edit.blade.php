@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-9 col-md-offset-3">
-                    {{ Form::submit('Добавить', ['class' => 'btn btn-primary']) }}
+                    {{ Form::submit('Редактировать', ['class' => 'btn btn-primary']) }}
                 </div>
             </div>
         {!! Form::close() !!}

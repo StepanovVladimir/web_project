@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Validation\ValidationException;
 
 class CommentsController extends Controller
 {
@@ -26,12 +27,12 @@ class CommentsController extends Controller
             $comment->comment = $content;
 
             $comment->save();
-
+ 
             return back();
         }
         catch (ValidationException $err)
         {
-            
+            return back()->with('error', 'Вы не написали комментарий');
         }
     }
     
@@ -41,10 +42,13 @@ class CommentsController extends Controller
         return view('pages.comments', ['comments' => $comments]);
     }
     
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $comment = Comment::find($id);
-        $comment->delete();
-        return back();
+        if ($request->ajax())
+        {
+            $id = (int)$request->input('id');
+            $comment = Comment::find($id);
+            $comment->delete();
+        }
     }
 }
