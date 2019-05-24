@@ -8,88 +8,51 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .category {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <body>
-        @if (Route::has('login'))
-            <div class="top-right links">
-                @auth
-                    <a href="{{ url('/home') }}">Моя страница</a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+            <a href="/" class="navbar-brand top_link">На главную</a>
+            @if (Route::has('login'))
+                <div>
+                    @auth
+                        <a href="{{ url('/home') }}">Моя страница</a>
+                    @else
+                        <a href="{{ route('login') }}">Login</a>
 
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
-                    @endif
-                @endauth
-                @foreach (categories() as $category)
-                    <p class="category"><a href="{{ route('category.show', ['id' => $category->id]) }}">{{ $category->name }}</a></p>
-                @endforeach
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto sidenav bg-light">
+                    @foreach (categories() as $category)
+                        <li class="nav-item"><a href="{{ route('category.show', ['id' => $category->id]) }}" class="nav-link">{{ $category->name }}</a></li>
+                    @endforeach
+                </ul>
             </div>
-        @endif
-        <div class="container">
+        </nav>
+        <div class="container welcome_container">
             <div class="row">
-                <header class="col-md-10">
-                    <a href="/" class="btn btn-primary">На главную</a>
-                </header>
                 @yield('content')
             </div>
         </div>
         <script src="/js/jquery-3.2.1.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
         <script src="/js/main.js"></script>

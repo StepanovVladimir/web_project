@@ -13,10 +13,10 @@ class CommentsController extends Controller
         try
         {
             $this->validate($request, [
-                'content' => 'required',
+                'comment' => 'required',
             ]);
             
-            $content = $request->input('content');
+            $text_comment = $request->input('comment');
             $id_post = (int)$request->input('id_post');
             $id_user = auth()->user()->id;
 
@@ -24,10 +24,10 @@ class CommentsController extends Controller
 
             $comment->id_post = $id_post;
             $comment->id_user = $id_user;
-            $comment->comment = $content;
+            $comment->comment = $text_comment;
 
             $comment->save();
- 
+
             return back();
         }
         catch (ValidationException $err)
@@ -42,6 +42,30 @@ class CommentsController extends Controller
         return view('pages.comments', ['comments' => $comments]);
     }
     
+    public function update(Request $request, $id)
+    {
+        try
+        {
+            $this->validate($request, [
+                'comment' => 'required',
+            ]);
+            
+            $text_comment = $request->input('comment');
+            
+            $comment = Comment::find($id);
+            
+            $comment->comment = $text_comment;
+            
+            $comment->save();
+
+            return back();
+        }
+        catch (ValidationException $err)
+        {
+            return back()->with('error', 'Вы не написали комментарий');
+        }
+    }
+    
     public function destroy(Request $request)
     {
         if ($request->ajax())
@@ -50,5 +74,6 @@ class CommentsController extends Controller
             $comment = Comment::find($id);
             $comment->delete();
         }
+        return redirect()->route('main');
     }
 }

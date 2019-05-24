@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function()
 {
     Route::post('/comments', 'CommentsController@store')->name('comments.store');
     Route::get('/home/comments', 'CommentsController@show')->name('user.comments.show');
+    Route::put('/comments/{id}', 'CommentsController@update')->where('id', '\d+')->name('comment.update');
     Route::delete('/comment', 'CommentsController@destroy')->name('comment.destroy');
     
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function()

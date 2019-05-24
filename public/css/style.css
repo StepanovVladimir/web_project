@@ -1,0 +1,167 @@
+.header
+{
+    margin-top: 10px;
+}
+
+.post
+{
+    font-family: "Source Sans Pro";
+    margin-bottom: 50px;
+}
+
+.post_title
+{
+    color: rgb(80,106,133);
+}
+
+.post_title_link
+{
+    font-size: 2.25rem;
+    color: rgb(80,106,133);
+    transition: all 0.3s ease;
+}
+
+.post_title_link:hover
+{
+    color: rgb(0,188,156);
+    text-decoration: none;
+}
+
+.post_image
+{
+    width: 100%;
+}
+
+.post_btn
+{
+    float: left;
+    margin-right: 10px;
+}
+
+.comment_post_title
+{
+    font-size: 1.35rem;
+    color: rgb(80,106,133);
+    font-family: "Source Sans Pro";
+    transition: all 0.3s ease;
+}
+
+.comment_post_title:hover
+{
+    color: rgb(0,188,156);
+    text-decoration: none;
+}
+
+.comment
+{
+    font-family: "Source Sans Pro";
+}
+
+.comment_edit
+{
+    display: none;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 991px)
+{
+    .post_title
+    {
+        font-size: 1.5rem;
+    }
+    
+    .post_title_link
+    {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 400px)
+{
+    .comment_post_title
+    {
+        font-size: 1.2rem;
+    }
+}
+
+.category
+{
+    text-align: center;
+}
+
+body
+{
+    background-color: #ffffff;
+}
+
+.welcome_container {
+    padding-top: 4.5rem;
+}
+
+.nav-link
+{
+    text-align: center;
+}
+
+.nav-link:hover {
+    transition: all 0.4s;
+}
+
+.nav-link-collapse:after {
+    float: right;
+    content: '\f067';
+    font-family: 'FontAwesome';
+}
+
+.nav-link-show:after {
+    float: right;
+    content: '\f068';
+    font-family: 'FontAwesome';
+}
+
+.nav-item ul.nav-second-level {
+    padding-left: 0;
+}
+
+.nav-item ul.nav-second-level > .nav-item {
+    padding-left: 20px;
+}
+
+.top_link
+{
+    margin: 0;
+}
+
+@media (min-width: 992px)
+{
+    .sidenav
+    {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 100vh;
+        margin-top: 54px;
+        box-sizing: border-box;
+    }
+
+    .navbar-expand-lg .sidenav
+    {
+        flex-direction: column;
+    }
+
+    .content-wrapper
+    {
+        margin-left: 230px;
+    }
+    
+    .top_link
+    {
+        margin-right: 5px;
+    }
+}
+
+.clear
+{
+    clear: both;
+}
