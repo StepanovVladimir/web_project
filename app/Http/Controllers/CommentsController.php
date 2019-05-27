@@ -53,9 +53,7 @@ class CommentsController extends Controller
             $text_comment = $request->input('comment');
             
             $comment = Comment::find($id);
-            
             $comment->comment = $text_comment;
-            
             $comment->save();
 
             return back();

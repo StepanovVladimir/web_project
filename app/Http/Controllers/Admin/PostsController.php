@@ -9,25 +9,14 @@ use App\Models\Posts;
 use App\Models\Category;
 use Illuminate\Validation\ValidationException;
 
-class DashPosts extends Controller
+class PostsController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $categories = Category::orderby('name', 'asc')->get();
         return view('admin.posts.create', ['categories' => $categories]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try
@@ -44,7 +33,7 @@ class DashPosts extends Controller
             $post = new Posts();
 
             $post->title = $request->title;
-            $post -> description = $request->description;
+            $post->description = $request->description;
             $post->content = $request->content;
             $post->image = $path;
 
@@ -59,12 +48,7 @@ class DashPosts extends Controller
             return back()->with('error', 'Вы не заполнили все поля');
         }
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $post = Posts::find($id);
@@ -73,13 +57,6 @@ class DashPosts extends Controller
         return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         try
@@ -116,12 +93,6 @@ class DashPosts extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $post = Posts::find($id);

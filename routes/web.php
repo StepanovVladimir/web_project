@@ -30,11 +30,11 @@ Route::group(['middleware' => 'auth'], function()
     
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function()
     {
-        Route::get('/post/create', 'Admin\DashPosts@create')->name('post.create');
-        Route::post('/post', 'Admin\DashPosts@store')->name('post.store');
-        Route::get('/post/{id}/edit', 'Admin\DashPosts@edit')->where('id', '\d+')->name('post.edit');
-        Route::put('/post/{id}', 'Admin\DashPosts@update')->where('id', '\d+')->name('post.update');
-        Route::delete('/post/{id}', 'Admin\DashPosts@destroy')->where('id', '\d+')->name('post.destroy');
+        Route::get('/post/create', 'Admin\PostsController@create')->name('post.create');
+        Route::post('/post', 'Admin\PostsController@store')->name('post.store');
+        Route::get('/post/{id}/edit', 'Admin\PostsController@edit')->where('id', '\d+')->name('post.edit');
+        Route::put('/post/{id}', 'Admin\PostsController@update')->where('id', '\d+')->name('post.update');
+        Route::delete('/post/{id}', 'Admin\PostsController@destroy')->where('id', '\d+')->name('post.destroy');
         
         
         Route::get('/comments', 'Admin\CommentsController@show')->name('comments.show');
