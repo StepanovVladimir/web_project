@@ -8,15 +8,24 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <body>
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a href="{{ url('/home') }}" class="nav-link">Моя страница</a></li>
+                        <li class="nav-item"><a href="{{ route('post.create') }}" class="nav-link">Добавить статью</a></li>
+                        <li class="nav-item"><a href="{{ route('comments.show') }}" class="nav-link">Все комментарии</a></li>
+                        <li class="nav-item"><a href="{{ route('categories.index') }}" class="nav-link">Категории</a></li>
+                        <li class="nav-item"><a href="{{ route('categories.create') }}" class="nav-link">Добавить категорию</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br>
         <div class="container">
-            <header class="header">
-                <a href="{{ url('/home') }}" class="btn btn-primary">Моя страница</a>
-                <a href="{{ route('post.create') }}" class="btn btn-primary">Добавить статью</a>
-                <a href="{{ route('comments.show') }}" class="btn btn-primary">Все комментарии</a>
-                <a href="{{ route('categories.index') }}" class="btn btn-primary">Категории</a>
-                <a href="{{ route('categories.create') }}" class="btn btn-primary">Добавить категорию</a>
-            </header>
-            <br>
             @yield('content')
         </div>
         <script src="/js/jquery-3.2.1.js"></script>
