@@ -10,7 +10,7 @@ class CommentsController extends Controller
 {
     public function show()
     {
-        $comments = Comment::orderby('created_at', 'desc')->paginate(4);
+        $comments = Comment::orderby('created_at', 'desc')->paginate(5);
         return view('admin.comments.show', ['comments' => $comments]);
     }
 }

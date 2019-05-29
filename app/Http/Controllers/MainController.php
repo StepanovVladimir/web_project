@@ -11,7 +11,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        $posts = Posts::orderby('created_at', 'desc')->paginate(4);
+        $posts = Posts::orderby('created_at', 'desc')->paginate(5);
         return view('pages.main', ['posts' => $posts]);
     }
     
@@ -25,7 +25,7 @@ class MainController extends Controller
     public function showCategory($id)
     {
         $category = Category::find($id);
-        $posts = $category->posts()->orderby('created_at', 'desc')->paginate(4);
+        $posts = $category->posts()->orderby('created_at', 'desc')->paginate(5);
         return view('pages.main', ['posts' => $posts]);
     }
 }
