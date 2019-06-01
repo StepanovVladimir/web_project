@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', 'MainController@index')->name('main');
+Route::get('/', 'PostsController@index')->name('main');
 
-Route::get('/post/{id}', 'MainController@show')->where('id', '\d+')->name('post.show');
+Route::get('/post/{id}', 'PostsController@show')->where('id', '\d+')->name('post.show');
 
-Route::get('/category/{id}', 'MainController@showCategory')->where('id', '\d+')->name('category.show');
+Route::get('/category/{id}', 'PostsController@showCategory')->where('id', '\d+')->name('category.show');
 
 Auth::routes();
 

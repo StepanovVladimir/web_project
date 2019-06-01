@@ -7,7 +7,7 @@ use App\Models\Posts;
 use App\Models\Comment;
 use App\Models\Category;
 
-class MainController extends Controller
+class PostsController extends Controller
 {
     public function index()
     {
