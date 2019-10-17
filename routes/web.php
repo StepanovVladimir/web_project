@@ -28,18 +28,22 @@ Route::group(['middleware' => 'auth'], function()
     Route::put('/comments/{id}', 'CommentsController@update')->where('id', '\d+')->name('comment.update');
     Route::delete('/comment', 'CommentsController@destroy')->name('comment.destroy');
     
-    Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function()
+    Route::group(['middleware' => 'deletingComments', 'prefix' => 'moderate'], function()
+    {
+        Route::get('/comments', 'Admin\CommentsController@show')->name('comments.show');
+    });
+    
+    Route::group(['middleware' => 'managingPosts'], function()
     {
         Route::get('/post/create', 'Admin\PostsController@create')->name('post.create');
         Route::post('/post', 'Admin\PostsController@store')->name('post.store');
         Route::get('/post/{id}/edit', 'Admin\PostsController@edit')->where('id', '\d+')->name('post.edit');
         Route::put('/post/{id}', 'Admin\PostsController@update')->where('id', '\d+')->name('post.update');
         Route::delete('/post/{id}', 'Admin\PostsController@destroy')->where('id', '\d+')->name('post.destroy');
-        
-        
-        Route::get('/comments', 'Admin\CommentsController@show')->name('comments.show');
-        
-        
+    });
+    
+    Route::group(['middleware' => 'managingCatergories'], function()
+    {
         Route::get('/categories', 'Admin\CategoriesController@index')->name('categories.index');
         Route::get('/categories/create', 'Admin\CategoriesController@create')->name('categories.create');
         Route::post('/categories', 'Admin\CategoriesController@store')->name('categories.store');

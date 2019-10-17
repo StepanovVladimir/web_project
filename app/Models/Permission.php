@@ -8,6 +8,6 @@ class Permission extends Model
 {
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'roles_has_permissions', 'id_perission', 'id_role');
+        return $this->belongsToMany(Role::class, 'roles_has_permissions', 'id_permission', 'id_role');
     }
 }

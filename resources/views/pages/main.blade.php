@@ -11,7 +11,7 @@
                 <p>{!! $post->description !!}</p>
                 <p>{{ Carbon\Carbon::parse($post->created_at)->format('d m Y') }}</p>
                 @auth
-                    @if (Auth::user()->isAdmin == 1)
+                    @if (Auth::user()->role->permissions()->where('name', 'Управление статьями')->first())
                         <a href="{!! route('post.edit', ['id' => $post->id]) !!}" class="btn btn-primary post_btn">Редактировать</a>
                         {!! Form::open(['method' => 'DELETE', 'route' => ['post.destroy', $post->id], 'class' => 'post_btn']) !!}
                         {!! Form::submit('Удалить', ['class' => 'btn btn-danger post_delete']) !!}

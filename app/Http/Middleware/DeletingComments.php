@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+class DeletingComments
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->isAdmin == 0)
+        if (!Auth::user()->role->permissions()->where('name', 'Удаление комментариев')->first())
         {
             return redirect(route('home'));
         }
