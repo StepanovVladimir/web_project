@@ -41,7 +41,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto sidenav bg-light">
-                    @foreach (categories() as $category)
+                    @foreach (getCategories() as $category)
                         <li class="nav-item"><a href="{{ route('category.show', ['id' => $category->id]) }}" class="nav-link">{{ $category->name }}</a></li>
                     @endforeach
                 </ul>

@@ -19,13 +19,13 @@
                     @endif
                     @auth
                         <div><a href="{{ route('user.comments.show') }}">Мои комментарии</a></div>
-                        @if (Auth::user()->role->permissions()->where('name', 'Удаление комментариев')->first())
+                        @if (canDeleteComments())
                             <div><a href="{{ route('comments.show') }}">Все комментарии</a></div>
                         @endif
-                        @if (Auth::user()->role->permissions()->where('name', 'Управление статьями')->first())
+                        @if (canManagePosts())
                             <div><a href="{{ route('post.create') }}">Добавить статью</a></div>
                         @endif
-                        @if (Auth::user()->role->permissions()->where('name', 'Управление категориями')->first())
+                        @if (canManageCategories())
                             <div><a href="{{ route('categories.index') }}">Категории</a></div>
                             <div><a href="{{ route('categories.create') }}">Добавить категорию</a></div>
                         @endif

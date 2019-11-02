@@ -16,7 +16,7 @@ class ManagingCategories
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->role->permissions()->where('name', 'Управление категориями')->first())
+        if (!Auth::user()->role->permissions()->where('name', 'managing_categories')->first())
         {
             return redirect(route('home'));
         }

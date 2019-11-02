@@ -16,7 +16,7 @@ class DeletingComments
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->role->permissions()->where('name', 'Удаление комментариев')->first())
+        if (!Auth::user()->role->permissions()->where('name', 'deleting_comments')->first())
         {
             return redirect(route('home'));
         }

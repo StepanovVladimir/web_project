@@ -11,7 +11,7 @@
             <p>{!! $post->content !!}</p>
             <p>{{ Carbon\Carbon::parse($post->created_at)->format('d m Y') }}</p>
             @auth
-                @if (Auth::user()->role->permissions()->where('name', 'Управление статьями')->first())
+                @if (canManagePosts())
                     <a href="{!! route('post.edit', ['id' => $post->id]) !!}" class="btn btn-primary post_btn">Редактировать</a>
                     {!! Form::open(['method' => 'DELETE', 'route' => ['post.destroy', $post->id], 'class' => 'post_btn']) !!}
                     {!! Form::submit('Удалить', ['class' => 'btn btn-danger post_delete']) !!}
@@ -47,7 +47,7 @@
                         @if (Auth::user()->id == $comment->id_user)
                             <a href="javascript:;" class="edit_comment" rel="{{ $comment->id }}">Редактировать</a>
                         @endif
-                        @if (Auth::user()->id == $comment->id_user || Auth::user()->role->permissions()->where('name', 'Удаление комментариев')->first())
+                        @if (Auth::user()->id == $comment->id_user || canDeleteComments())
                             <a href="javascript:;" class="delete" rel="{{ $comment->id }}" token="{{ csrf_token() }}" route="{!! route('comment.destroy') !!}">Удалить</a>
                         @endif
                     @endauth

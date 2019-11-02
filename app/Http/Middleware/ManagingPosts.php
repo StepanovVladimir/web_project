@@ -16,7 +16,7 @@ class ManagingPosts
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->role->permissions()->where('name', 'Управление статьями')->first())
+        if (!Auth::user()->role->permissions()->where('name', 'managing_posts')->first())
         {
             return redirect(route('home'));
         }
