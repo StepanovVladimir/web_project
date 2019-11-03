@@ -62,7 +62,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'deletingComments' => \App\Http\Middleware\DeletingComments::class,
         'managingPosts' => \App\Http\Middleware\ManagingPosts::class,
-        'managingCatergories' => \App\Http\Middleware\ManagingCategories::class
+        'managingCatergories' => \App\Http\Middleware\ManagingCategories::class,
+        'managingUsers' => \App\Http\Middleware\ManagingUsers::class
     ];
 
     /**

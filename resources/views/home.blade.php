@@ -29,6 +29,9 @@
                             <div><a href="{{ route('categories.index') }}">Категории</a></div>
                             <div><a href="{{ route('categories.create') }}">Добавить категорию</a></div>
                         @endif
+                        @if (canManageUsers())
+                            <div><a href="{{ route('users.index') }}">Пользователи</a></div>
+                        @endif
                     @endauth
                 </div>
             </div>

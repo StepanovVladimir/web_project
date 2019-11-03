@@ -4,6 +4,7 @@ function onWindowLoaded()
 {
     $(".delete").on('click', deleteItem);
     $(".post_delete").on('click', deletePost);
+    $(".change_role").on('click', changeRole);
     $("#submit_comment").on('click', validateComment);
     $("#submit_post").on('click', validatePost);
     $("#submit_category").on('click', validateCategory);
@@ -37,6 +38,22 @@ function deletePost()
     {
         event.preventDefault();
     }
+}
+
+function changeRole()
+{
+    let route = $(this).attr("route");
+    let token = $(this).attr("token");
+    $.ajax(
+    {
+        type: "PUT",
+        url: route,
+        data: { _token: token },
+        complete: function()
+        {
+            location.reload();
+        }
+    });
 }
 
 function validateComment()

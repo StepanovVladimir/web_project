@@ -16,10 +16,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a href="{{ url('/home') }}" class="nav-link">Моя страница</a></li>
-                        <li class="nav-item"><a href="{{ route('post.create') }}" class="nav-link">Добавить статью</a></li>
-                        <li class="nav-item"><a href="{{ route('comments.show') }}" class="nav-link">Все комментарии</a></li>
-                        <li class="nav-item"><a href="{{ route('categories.index') }}" class="nav-link">Категории</a></li>
-                        <li class="nav-item"><a href="{{ route('categories.create') }}" class="nav-link">Добавить категорию</a></li>
+                        @if (canDeleteComments())
+                            <li class="nav-item"><a href="{{ route('comments.show') }}" class="nav-link">Все комментарии</a></li>
+                        @endif
+                        @if (canManagePosts())
+                            <li class="nav-item"><a href="{{ route('post.create') }}" class="nav-link">Добавить статью</a></li>
+                        @endif
+                        @if (canManageCategories())
+                            <li class="nav-item"><a href="{{ route('categories.index') }}" class="nav-link">Категории</a></li>
+                            <li class="nav-item"><a href="{{ route('categories.create') }}" class="nav-link">Добавить категорию</a></li>
+                        @endif
+                        @if (canManageUsers())
+                            <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">Пользователи</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>

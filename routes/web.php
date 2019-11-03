@@ -51,4 +51,10 @@ Route::group(['middleware' => 'auth'], function()
         Route::put('/categories/{id}', 'Admin\CategoriesController@update')->where('id', '\d+')->name('categories.update');
         Route::delete('/categories', 'Admin\CategoriesController@destroy')->name('categories.destroy');
     });
+    
+    Route::group(['middleware' => 'managingUsers'], function()
+    {
+        Route::get('/users', 'Admin\UsersController@index')->name('users.index');
+        Route::put('/users/{id}', 'Admin\UsersController@changeRole')->where('id', '\d+')->name('users.role.change');
+    });
 });

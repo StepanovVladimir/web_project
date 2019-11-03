@@ -8,7 +8,9 @@
             @foreach ($categories as $category)
                 <tr>
                     <td>{{ $category->name }}</td>
-                    <td><a href="{!! route('categories.edit', ['id' => $category->id]) !!}" class="btn btn-primary">Редактировать</a></td>
+                    <td>
+                        <a href="{!! route('categories.edit', ['id' => $category->id]) !!}" class="btn btn-primary">Редактировать</a>
+                    </td>
                     <td>
                         <a href="javascript:;" class="btn btn-danger delete" rel="{{ $category->id }}" token="{{ csrf_token() }}" route="{!! route('categories.destroy') !!}">Удалить</a>
                     </td>

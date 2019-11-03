@@ -48,3 +48,15 @@ function canManageCategories()
         return false;
     }
 }
+
+function canManageUsers()
+{
+    if (Auth::user()->role->permissions()->where('name', 'managing_users')->first())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
