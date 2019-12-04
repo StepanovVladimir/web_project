@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function()
 {
     Route::put('/like', 'LikesController@put')->name('like.put');
+    Route::get('/home/likes', 'LikesController@show')->name('like.show');
     
     Route::post('/comments', 'CommentsController@store')->name('comments.store');
     Route::get('/home/comments', 'CommentsController@show')->name('user.comments.show');

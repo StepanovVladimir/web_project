@@ -17,22 +17,21 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @auth
-                        <div><a href="{{ route('user.comments.show') }}">Мои комментарии</a></div>
-                        @if (canDeleteComments())
-                            <div><a href="{{ route('comments.show') }}">Все комментарии</a></div>
-                        @endif
-                        @if (canManagePosts())
-                            <div><a href="{{ route('post.create') }}">Добавить статью</a></div>
-                        @endif
-                        @if (canManageCategories())
-                            <div><a href="{{ route('categories.index') }}">Категории</a></div>
-                            <div><a href="{{ route('categories.create') }}">Добавить категорию</a></div>
-                        @endif
-                        @if (canManageUsers())
-                            <div><a href="{{ route('users.index') }}">Пользователи</a></div>
-                        @endif
-                    @endauth
+                    <div><a href="{{ route('like.show') }}">Понравившиеся статьи</a></div>
+                    <div><a href="{{ route('user.comments.show') }}">Мои комментарии</a></div>
+                    @if (canDeleteComments())
+                        <div><a href="{{ route('comments.show') }}">Все комментарии</a></div>
+                    @endif
+                    @if (canManagePosts())
+                        <div><a href="{{ route('post.create') }}">Добавить статью</a></div>
+                    @endif
+                    @if (canManageCategories())
+                        <div><a href="{{ route('categories.index') }}">Категории</a></div>
+                        <div><a href="{{ route('categories.create') }}">Добавить категорию</a></div>
+                    @endif
+                    @if (canManageUsers())
+                        <div><a href="{{ route('users.index') }}">Пользователи</a></div>
+                    @endif
                 </div>
             </div>
         </div>

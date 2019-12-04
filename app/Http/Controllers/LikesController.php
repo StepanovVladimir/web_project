@@ -32,6 +32,11 @@ class LikesController extends Controller
                 $like->save();
             }
         }
-        
+    }
+    
+    public function show()
+    {
+        $likes = auth()->user()->likes;
+        return view('pages.likes', ['likes' => $likes]);
     }
 }
