@@ -23,6 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function()
 {
+    Route::put('/like', 'LikesController@put')->name('like.put');
+    
     Route::post('/comments', 'CommentsController@store')->name('comments.store');
     Route::get('/home/comments', 'CommentsController@show')->name('user.comments.show');
     Route::put('/comments/{id}', 'CommentsController@update')->where('id', '\d+')->name('comment.update');

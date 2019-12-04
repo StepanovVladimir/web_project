@@ -38,13 +38,19 @@ class User extends Authenticatable
         'isAdmin' => 'boolean'
     ];
     
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'id_user', 'id');
-    }
     
     public function role()
     {
         return $this->belongsTo(Role::class, 'id_role', 'id');
+    }
+    
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'id_user', 'id');
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'id_user', 'id');
     }
 }

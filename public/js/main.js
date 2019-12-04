@@ -10,6 +10,7 @@ function onWindowLoaded()
     $("#submit_category").on('click', validateCategory);
     $(".edit_comment").on('click', showEditComment);
     $(".cancellation_edit").on('click', closeEditComment);
+    $(".put_like").on('click', putLike);
 }
 
 function deleteItem()
@@ -110,4 +111,21 @@ function closeEditComment()
     let id = $(this).attr("rel");
     $('#edit_' + id).css('display', 'none');
     $('#comment_' + id).css('display', 'block');
+}
+
+function putLike()
+{
+    let id_post = $(this).attr("rel");
+    let route = $(this).attr("route");
+    let token = $(this).attr("token");
+    $.ajax(
+    {
+        type: "PUT",
+        url: route,
+        data: { _token: token, id_post: id_post },
+        complete: function()
+        {
+            location.reload();
+        }
+    });
 }

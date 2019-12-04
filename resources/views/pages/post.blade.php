@@ -20,7 +20,15 @@
                 @endif
             @endauth
         </div>
+        <h2>Лайков: {{ $post->likes()->count() }}</h2>
         @auth
+            <a href="javascript:;" class="put_like" rel="{{ $post->id }}" token="{{ csrf_token() }}" route="{!! route('like.put') !!}">
+                @if ($post->likes()->where('id_user', auth()->user()->id)->first())
+                    Отменить лайк
+                @else
+                    Поставить лайк
+                @endif
+            </a>
             {!! Form::open(array('route' => 'comments.store')) !!}
                 <input type="hidden" value="{{ $post->id }}" name="id_post">
                 <div class="form-group">
@@ -38,7 +46,7 @@
         @else
             Зарегистрируйтесь, чтобы оставлять комментарии<br><br>
         @endauth
-        <h2>Комментариев: {{ $post->comments->count() }}</h2>
+        <h2>Комментариев: {{ $comments->count() }}</h2>
         @foreach ($comments as $comment)
             <div class="col-md-12 comment" id="comment_{{ $comment->id }}">
                 <span>

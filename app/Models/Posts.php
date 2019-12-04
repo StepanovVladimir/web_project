@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Posts extends Model
 {
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'id_post', 'id');
+    }
+    
     public function comments()
     {
         return $this->hasMany(Comment::class, 'id_post', 'id');
