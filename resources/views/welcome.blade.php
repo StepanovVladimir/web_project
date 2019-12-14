@@ -27,6 +27,7 @@
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
+                    <a href="{{ route('popular.categories') }}">Популярные категории</a>
                 </div>
             @endif
             <button

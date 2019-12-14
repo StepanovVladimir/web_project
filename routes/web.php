@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/popularcategories', 'CategoriesController@getPopular')->name('popular.categories');
+
 Route::group(['middleware' => 'auth'], function()
 {
     Route::put('/like', 'LikesController@put')->name('like.put');
