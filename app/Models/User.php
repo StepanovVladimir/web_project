@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'id_role', 'id');
     }
     
+    public function views()
+    {
+        return $this->hasMany(View::class, 'id_user', 'id');
+    }
+    
     public function likes()
     {
         return $this->hasMany(Like::class, 'id_user', 'id');

@@ -10,6 +10,10 @@
                 <img src="{{ asset('/storage/' . $post->image) }}" alt="{{ $post->title }}" class="post_image">
                 <p>{!! $post->description !!}</p>
                 <p>{{ Carbon\Carbon::parse($post->created_at)->format('d m Y') }}</p>
+                <h5 class="post_btn">Просмотров: {{ $post->views()->count() }}</h5>
+                <h5 class="post_btn">Лайков: {{ $post->likes()->count() }}</h5>
+                <h5 class="post_btn">Комментариев: {{ $post->comments->count() }}</h5>
+                <div class="clear"></div>
                 @auth
                     @if (canManagePosts())
                         <a href="{!! route('post.edit', ['id' => $post->id]) !!}" class="btn btn-primary post_btn">Редактировать</a>

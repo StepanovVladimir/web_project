@@ -20,7 +20,8 @@
                 @endif
             @endauth
         </div>
-        <h2>Лайков: {{ $post->likes()->count() }}</h2>
+        <h3>Просмотров: {{ $post->views()->count() }}</h3>
+        <h3>Лайков: {{ $post->likes()->count() }}</h3>
         @auth
             <a href="javascript:;" class="put_like" rel="{{ $post->id }}" token="{{ csrf_token() }}" route="{!! route('like.put') !!}">
                 @if ($post->likes()->where('id_user', auth()->user()->id)->first())
@@ -46,7 +47,7 @@
         @else
             Зарегистрируйтесь, чтобы оставлять комментарии<br><br>
         @endauth
-        <h2>Комментариев: {{ $comments->count() }}</h2>
+        <h3>Комментариев: {{ $comments->count() }}</h3>
         @foreach ($comments as $comment)
             <div class="col-md-12 comment" id="comment_{{ $comment->id }}">
                 <span>

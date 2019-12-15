@@ -98,6 +98,8 @@ class PostsController extends Controller
         $post = Posts::find($id);
         
         Storage::disk('public')->delete($post->image);
+        $post->views()->delete();
+        $post->likes()->delete();
         $post->comments()->delete();
         $post->categories()->detach();
         $post->delete();

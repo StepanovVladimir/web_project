@@ -17,6 +17,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <div><a href="{{ route('views.show') }}">Мои просмотры</a></div>
                     <div><a href="{{ route('like.show') }}">Понравившиеся статьи</a></div>
                     <div><a href="{{ route('user.comments.show') }}">Мои комментарии</a></div>
                     @if (canDeleteComments())
