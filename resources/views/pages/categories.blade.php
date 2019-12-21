@@ -5,10 +5,10 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 col-xl-10">
+            <div class="col-md-12">
                 @foreach ($categories as $category)
-                    <div class="post">
-                        <a href="{{ route('category.show', ['id' => $category->id]) }}" class="nav-link">{{ $category->name }}: {{ $category->sum }}</a>
+                    <div class="comment">
+                        <a href="{{ route('category.show', ['id' => $category->id]) }}" class="comment_post_title">{{ $category->name }}: {{ $category->sum }}</a>
                     </div>
                 @endforeach
             </div>

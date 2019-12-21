@@ -43,7 +43,7 @@
     font-size: 1.35rem;
     color: rgb(80,106,133);
     font-family: "Source Sans Pro";
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .comment_post_title:hover

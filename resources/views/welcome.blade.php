@@ -15,20 +15,18 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
-            <a href="/" class="navbar-brand top_link">На главную</a>
+            <a href="/" class="navbar-brand">На главную</a>
             @if (Route::has('login'))
-                <div>
-                    @auth
-                        <a href="{{ url('/home') }}">Моя страница</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+                @auth
+                    <a href="{{ url('/home') }}" class="navbar-brand">Моя страница</a>
+                @else
+                    <a href="{{ route('login') }}" class="navbar-brand">Войти</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                    <a href="{{ route('popular.categories') }}">Популярные категории</a>
-                </div>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="navbar-brand">Регистрация</a>
+                    @endif
+                @endauth
+                <a href="{{ route('popular.categories') }}" class="navbar-brand">Популярные категории</a>
             @endif
             <button
                 class="navbar-toggler"
@@ -43,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto sidenav bg-light">
                     @foreach (getCategories() as $category)
-                        <li class="nav-item"><a href="{{ route('category.show', ['id' => $category->id]) }}" class="nav-link">{{ $category->name }}</a></li>
+                        <li class="nav-item"><a href="{{ route('category.show', ['id' => $category->id]) }}" class="nav-link">{{ $category->name }}: {{ $category->posts()->count() }}</a></li>
                     @endforeach
                 </ul>
             </div>
